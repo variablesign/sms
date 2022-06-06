@@ -1,0 +1,59 @@
+{
+    "name": "variablesign/sms",
+    "description": "A Laravel SMS Gateway Integration package for bulk SMS providers in Ghana",
+    "keywords": [
+        "variablesign",
+        "sms"
+    ],
+    "homepage": "https://github.com/variablesign/sms",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Variable Sign",
+            "email": "variablesign@gmail.com",
+            "homepage": "https://variablesign.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.2",
+        "illuminate/support": "^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "VariableSign\\Sms\\": "src"
+        },
+        "files": [
+            "src/Helper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VariableSign\\Sms\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "VariableSign\\Sms\\SmsServiceProvider"
+            ],
+            "aliases": {
+                "Sms": "VariableSign\\Sms\\Facades\\Sms"
+            }
+        }
+    }
+}
