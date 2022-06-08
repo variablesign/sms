@@ -4,11 +4,11 @@ namespace VariableSign\Sms;
 
 class Builder
 {
-    protected array $recipients;
+    protected array $recipients = [];
 
     protected ?string $gateway;
 
-    protected string $message;
+    protected ?string $message = null;
 
     public function via(?string $gateway): self
     {
@@ -26,7 +26,7 @@ class Builder
 
     public function message(string $message): self
     {
-        $this->message = $message;
+        $this->message = trim($message);
 
         return $this;
     }
@@ -36,7 +36,7 @@ class Builder
         return $this->recipients;
     }
 
-    public function getMessage(): string
+    public function getMessage(): ?string
     {
         return $this->message;
     }

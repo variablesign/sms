@@ -2,8 +2,9 @@
 
 namespace VariableSign\Sms;
 
-use VariableSign\Sms\Contracts\Driver;
+use Exception;
 use Illuminate\Support\Collection;
+use VariableSign\Sms\Contracts\Driver;
 
 class Sms
 {
@@ -55,7 +56,6 @@ class Sms
 
     public function message(string $message): self
     {
-        $message = trim($message);
         $this->builder->message($message);
 
         return $this;
@@ -70,6 +70,10 @@ class Sms
 
     public function balance(): int
     {
+        if ($this->config('gateways.' . $this->gateway. '.balance')) {
+            return 0;
+        }
+
         $driver = $this->getDriverInstance();
 
         return $driver->dd($this->debug)->balance();
@@ -77,6 +81,10 @@ class Sms
 
     public function send(): Collection
     {
+        if ($this->config('gateways.' . $this->gateway. '.send')) {
+            return collect([]);
+        }
+
         $driver = $this->getDriverInstance();
         $recipients = $this->builder->getRecipients();
         $message = $this->builder->getMessage(); 
@@ -87,14 +95,64 @@ class Sms
 
     public function report(string|int $id): Collection
     {
+        if ($this->config('gateways.' . $this->gateway. '.report')) {
+            return collect([]);
+        }
+
         $driver = $this->getDriverInstance();
         $response = $driver->dd($this->debug)->report($id);
 
         return collect($response);
     }
 
+    public function otp(string $name = null, string|null $expiryDate = null, int $codeLength = 4): Collection
+    {
+        $codeLength = min(max($codeLength, 4), 8);
+        $numbers = '0123456789';
+        $code = substr(str_shuffle($numbers), 0, $codeLength);
+        $mergeData = [
+            'otp' => $code
+        ];
+
+        if ($this->builder->getMessage()) {
+            $message = __($this->builder->getMessage(), [
+                'code' => $code
+            ]);
+        } else {
+            $message = __('Your :name OTP is :code.', [
+                'name' => $name,
+                'code' => $code
+            ]);
+        }
+
+        if ($expiryDate) {
+            $expiryDate = now()->parse($expiryDate);
+
+            $message .= __(' It expires in :time.', [
+                'time' => $expiryDate->longAbsoluteDiffForHumans()
+            ]);
+            
+            $mergeData = array_merge($mergeData, [
+                'expires_at' => $expiryDate
+            ]);
+        }
+
+        $this->message($message);
+
+        $driver = $this->getDriverInstance();
+        $recipients = $this->builder->getRecipients();
+        $message = $this->builder->getMessage(); 
+        $response = $driver->dd($this->debug)->send($recipients, $message, $mergeData);
+
+        return collect($response);
+    }
+
     protected function getDriverInstance(): Driver
     {
+        if (!$this->driver) {
+            throw new Exception("SMS gateway or driver not found.");
+        }
+
         $class = $this->driver;
 
         return new $class($this->config('gateways.' . $this->gateway));

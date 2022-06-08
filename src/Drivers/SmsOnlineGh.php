@@ -53,20 +53,17 @@ class SmsOnlineGh extends Driver
             dd($response->object());
         }
 
-        $destinations = $response->json('data.messages.0.destinations', null);
         $id = $response->json('data.messages.0.reference');
         $responseCodes = ['2104', '2105', '2107', '2108', '2109'];
         $output = null;
 
-        if ($destinations) {
-            foreach ($destinations as $value) {
-                $output[] = array_merge([
-                    'id' => $id,
-                    'to' => $value['to'],
-                    'message' => $message,
-                    'status' =>  in_array($value['status']['id'], $responseCodes) ? 'submitted' : null
-                ], $mergeData);
-            }
+        foreach ($response->json('data.messages.0.destinations', []) as $value) {
+            $output[] = array_merge([
+                'id' => $id,
+                'to' => $value['to'],
+                'message' => $message,
+                'status' =>  in_array($value['status']['id'], $responseCodes) ? 'submitted' : null
+            ], $mergeData);
         }
 
         return $output;
@@ -82,17 +79,14 @@ class SmsOnlineGh extends Driver
             dd($response->object());
         }
 
-        $destinations = $response->json('data.messages.0.destinations');
         $output = null;
 
-        if ($destinations) {
-            foreach ($destinations as $value) {
-                $output[] = [
-                    'id' => $id,
-                    'to' => $value['to'],
-                    'status' => $value['status']['id'] == '2110' ? 'delivered' : null
-                ];
-            }
+        foreach ($response->json('data.messages.0.destinations', []) as $value) {
+            $output[] = [
+                'id' => $id,
+                'to' => $value['to'],
+                'status' => $value['status']['id'] == '2110' ? 'delivered' : null
+            ];
         }
 
         return $output;

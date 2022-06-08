@@ -80,6 +80,7 @@ return [
             ],
             'key' => null,
             'sender' => null,
+            'sandbox' => false,
         ],
 
     ],
