@@ -20,6 +20,12 @@ composer require variablesign/sms
 // Usage description here
 ```
 
+### Publish Config
+
+```bash
+php artisan vendor:publish --provider="VariableSign\Sms\SmsServiceProvider" --tag="config"
+```
+
 ### Testing
 
 ```bash
