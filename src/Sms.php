@@ -3,6 +3,7 @@
 namespace VariableSign\Sms;
 
 use VariableSign\Sms\Contracts\Driver;
+use Illuminate\Support\Collection;
 
 class Sms
 {
@@ -16,11 +17,13 @@ class Sms
 
     protected mixed $response;
 
+    protected bool $debug = false;
+
     public function __construct(array $config = null)
     {
         $this->config = $config;
         $this->builder = new Builder;
-        $this->via($this->config('default'));
+        $this->via();
     }
 
     protected function config(?string $key = null, mixed $default = null): mixed
@@ -36,7 +39,7 @@ class Sms
 
     public function via(?string $gateway = null): self
     {
-        $this->gateway = $gateway;
+        $this->gateway = $gateway ?? $this->config('default');
         $this->driver = $this->config('drivers.' . $this->gateway);
         $this->builder->via($gateway);
 
@@ -58,27 +61,34 @@ class Sms
         return $this;
     }
 
+    public function dd(): self
+    {
+        $this->debug = true;
+
+        return $this;
+    }
+
     public function balance(): int
     {
         $driver = $this->getDriverInstance();
 
-        return $driver->balance();
+        return $driver->dd($this->debug)->balance();
     }
 
-    public function send(): ?object
+    public function send(): Collection
     {
         $driver = $this->getDriverInstance();
         $recipients = $this->builder->getRecipients();
         $message = $this->builder->getMessage(); 
-        $response = $driver->send($recipients, $message);
+        $response = $driver->dd($this->debug)->send($recipients, $message);
 
         return collect($response);
     }
 
-    public function report(string|int $id): ?object
+    public function report(string|int $id): Collection
     {
         $driver = $this->getDriverInstance();
-        $response = $driver->report($id);
+        $response = $driver->dd($this->debug)->report($id);
 
         return collect($response);
     }

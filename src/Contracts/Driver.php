@@ -16,6 +16,8 @@ abstract class Driver
 
     protected string $contentType = 'application/json';
 
+    protected bool $debug;
+
     public function __construct(array $data)
     {
         $this->data = $data;
@@ -33,6 +35,13 @@ abstract class Driver
     protected function data(?string $key = null, mixed $default = null): mixed
     {
         return data_get($this->data, $key, $default);
+    }
+
+    public function dd(bool $debug): self
+    {
+        $this->debug = $debug;
+
+        return $this;
     }
 
     protected function boot(): void

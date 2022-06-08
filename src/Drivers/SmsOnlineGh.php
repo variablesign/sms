@@ -19,6 +19,10 @@ class SmsOnlineGh extends Driver
     {
         $response = $this->client->post($this->data('endpoints.balance'));
 
+        if ($this->debug) {
+            dd($response->object());
+        }
+
         return $response->json('data.balance.amount', 0);
     }
 
@@ -45,6 +49,10 @@ class SmsOnlineGh extends Driver
         
         $response = $this->client->post($this->data('endpoints.send'), $data);
 
+        if ($this->debug) {
+            dd($response->object());
+        }
+
         $destinations = $response->json('data.messages.0.destinations', null);
         $id = $response->json('data.messages.0.reference');
         $responseCodes = ['2104', '2105', '2107', '2108', '2109'];
@@ -54,7 +62,8 @@ class SmsOnlineGh extends Driver
             foreach ($destinations as $value) {
                 $output[] = array_merge([
                     'id' => $id,
-                    'recipient' => $value['to'],
+                    'to' => $value['to'],
+                    'message' => $message,
                     'status' =>  in_array($value['status']['id'], $responseCodes) ? 'submitted' : null
                 ], $mergeData);
             }
@@ -69,6 +78,10 @@ class SmsOnlineGh extends Driver
                 'reference' => $id
             ]);
 
+        if ($this->debug) {
+            dd($response->object());
+        }
+
         $destinations = $response->json('data.messages.0.destinations');
         $output = null;
 
@@ -76,7 +89,7 @@ class SmsOnlineGh extends Driver
             foreach ($destinations as $value) {
                 $output[] = [
                     'id' => $id,
-                    'recipient' => $value['to'],
+                    'to' => $value['to'],
                     'status' => $value['status']['id'] == '2110' ? 'delivered' : null
                 ];
             }
