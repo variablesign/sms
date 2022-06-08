@@ -21,7 +21,7 @@ class SmsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('sms.php'),
+                __DIR__.'/../config/sms.php' => config_path('sms.php'),
             ], 'config');
 
             // Publishing the views.
@@ -42,6 +42,11 @@ class SmsServiceProvider extends ServiceProvider
             // Registering package commands.
             // $this->commands([]);
         }
+
+        // Bind the main class to use with the facade
+        $this->app->bind('sms', function () {
+            return new Sms;
+        });
     }
 
     /**
@@ -50,11 +55,6 @@ class SmsServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'sms');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('sms', function () {
-            return new Sms;
-        });
+        $this->mergeConfigFrom(__DIR__.'/../config/sms.php', 'sms');
     }
 }
