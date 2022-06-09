@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/variablesign/sms.svg?style=flat-square)](https://packagist.org/packages/variablesign/sms)
 [![Total Downloads](https://img.shields.io/packagist/dt/variablesign/sms.svg?style=flat-square)](https://packagist.org/packages/variablesign/sms)
-![GitHub Actions](https://github.com/variablesign/sms/actions/workflows/main.yml/badge.svg)
+![GitHub License](https://img.shields.io/github/license/variablesign/sms)
 
 A Laravel SMS Gateway Integration package for bulk SMS providers in **Ghana**. Below are the gateways that are currently supported and others added in future updates.
 
@@ -23,8 +23,8 @@ Supported gateways:
 
 ## System Requirements
 
-- PHP 7.4 or greater 
-- Laravel 8|9
+- PHP 7.2 or greater 
+- Laravel 7 or greater
 
 ## Installation
 
