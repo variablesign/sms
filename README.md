@@ -85,7 +85,7 @@ $response = Sms::via('mnotify')->balance();
 Without facades
 
 ```php
-use use VariableSign\Sms\Sms;
+use VariableSign\Sms\Sms;
 
 $response = (new Sms)->via('mnotify')->balance();
 ```
@@ -123,7 +123,7 @@ $response = Sms::via('arkesel')
 Without facades
 
 ```php
-use use VariableSign\Sms\Sms;
+use VariableSign\Sms\Sms;
 
 $response = (new Sms)->via('arkesel')
     ->to(['2332xxxxxxxx','2332xxxxxxxx'])
@@ -175,7 +175,7 @@ $response = Sms::via('arkesel')->report('c61ff669-4bb1-41c1-97ea-11658dedafbd');
 Without facades
 
 ```php
-use use VariableSign\Sms\Sms;
+use VariableSign\Sms\Sms;
 
 $response = (new Sms)->via('arkesel')->report('c61ff669-4bb1-41c1-97ea-11658dedafbd');
 ```
