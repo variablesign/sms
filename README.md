@@ -248,7 +248,7 @@ Returns `\Illuminate\Support\Collection` as the response;
 ]
 ```
 
-Or with a your own custom messages. Use the `:code` placeholder in your messages and it will be replaced with the generated OTP. You can generate a code length between `4` to `8`. The example below generates a code length of `6`.
+Or with your own custom messages. Use the `:code` placeholder in your messages and it will be replaced with the generated OTP. You can generate a code length between `4` to `8`. The example below generates a code length of `6`.
 
 ```php
 use VariableSign\Sms\Facades\Sms;
