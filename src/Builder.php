@@ -40,9 +40,4 @@ class Builder
     {
         return $this->message;
     }
-
-    public function getGateway(): ?string
-    {
-        return $this->gateway;
-    }
 }

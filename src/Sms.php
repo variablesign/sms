@@ -43,7 +43,7 @@ class Sms
         $this->gateway = $gateway ?? $this->config('default');
         $this->driver = $this->config('drivers.' . $this->gateway);
         $this->builder->via($gateway);
-
+        
         return $this;
     }
 
@@ -161,5 +161,20 @@ class Sms
     protected function getDriver(): ?string
     {
         return $this->driver;
+    }
+
+    public function getRecipients(): array
+    {
+        return $this->builder->getRecipients();
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->builder->getMessage(); 
+    }
+
+    public function getGateway(): ?string
+    {
+        return $this->gateway; 
     }
 }
