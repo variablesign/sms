@@ -275,6 +275,57 @@ Returns `\Illuminate\Support\Collection` as the response;
 ]
 ```
 
+## Channel Usage
+
+You can also send SMS messages through Laravel's notification class using `php artisan make:notification` command via our `SmsChannel::class` as the channel:
+
+```php
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use VariableSign\Sms\Channels\SmsChannel;
+use Illuminate\Notifications\Notification;
+
+class PaymentNotification extends Notification
+{
+    use Queueable;
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return [SmsChannel::class];
+    }
+
+    /**
+     * Get the sms representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toSms($notifiable)
+    {
+        return sms()
+            ->via('smsonlinegh') // optional
+            ->to($notifiable->phone)
+            ->message('Your payment of 750.00 for order #10045 was successful.');
+    }
+}
+```
+
+Sending the notification:
+
+```php
+$user->notify(new PaymentNotification);
+```
+
+### Notification channel response 
+You can learn how to retrieve the response through the `NotificationSent` event from the Notification section of the Laravel docs.
+
 ### Debugging
 You can die dump the raw api response by adding the `dd()` method.
 
