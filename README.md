@@ -305,7 +305,7 @@ class PaymentNotification extends Notification
      * Get the sms representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Support\Collection
+     * @return \VariableSign\Sms\Sms
      */
     public function toSms($notifiable)
     {
