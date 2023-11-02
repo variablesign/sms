@@ -2,6 +2,9 @@
 
 All notable changes to `sms` will be documented in this file
 
+## 2.0.0
+
+- The `balance` method now returns `null` as default instead of `0`
 
 ## 1.2.0
 
