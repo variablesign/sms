@@ -68,10 +68,10 @@ class Sms
         return $this;
     }
 
-    public function balance(): int
+    public function balance(): null|int
     {
         if ($this->config('gateways.' . $this->gateway. '.balance')) {
-            return 0;
+            return null;
         }
 
         $driver = $this->getDriverInstance();
