@@ -4,7 +4,7 @@ All notable changes to `sms` will be documented in this file
 
 ## 2.0.0
 
-- The `balance` method now returns `null` as default instead of `0`
+- The `balance` method now returns `null` as default instead of `0`. This helps to differentiate between a failed connection and `0` balance
 
 ## 1.2.0
 
