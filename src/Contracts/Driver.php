@@ -49,7 +49,7 @@ abstract class Driver
         //
     }
 
-    abstract public function balance(): int;
+    abstract public function balance(): null|int;
 
     abstract public function send(array $recipients, string $message, array $mergeData = []): ?array;
 

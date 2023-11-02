@@ -13,7 +13,7 @@ class UsmsGh extends Driver
             ]);
     }
 
-    public function balance(): int
+    public function balance(): null|int
     {
         $response = $this->client->get($this->data('endpoints.balance'));
 

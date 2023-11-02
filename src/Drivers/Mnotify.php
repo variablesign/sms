@@ -11,7 +11,7 @@ class Mnotify extends Driver
         //
     }
 
-    public function balance(): int
+    public function balance(): null|int
     {
         $data = [
             'key' => $this->data('key')

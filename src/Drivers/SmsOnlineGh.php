@@ -15,7 +15,7 @@ class SmsOnlineGh extends Driver
             ]);
     }
 
-    public function balance(): int
+    public function balance(): null|int
     {
         $response = $this->client->post($this->data('endpoints.balance'));
 
