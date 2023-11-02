@@ -23,7 +23,7 @@ class SmsOnlineGh extends Driver
             dd($response->object());
         }
 
-        return $response->json('data.balance.amount', 0);
+        return $response->json('data.balance.amount');
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array

@@ -23,7 +23,7 @@ class Mnotify extends Driver
             dd($response->object());
         }
 
-        return $response->json('balance', 0);
+        return $response->json('balance');
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array
