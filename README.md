@@ -96,7 +96,7 @@ With helper function
 $response = sms()->via('mnotify')->balance();
 ```
 
-Returns an integer as the response or `0` as the default;
+Returns an integer as the response or `null` as the default;
 
 ```php
 250
