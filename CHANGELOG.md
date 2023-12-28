@@ -2,6 +2,18 @@
 
 All notable changes to `sms` will be documented in this file
 
+## 2.0.3
+
+- Fixed `Arkesel` driver return `0` on error when checking balance instead of `null`
+
+## 2.0.2
+
+- Updated drivers to match changes from v2.0.1
+
+## 2.0.1
+
+- Updated drivers to match changes from v2.0.0
+
 ## 2.0.0
 
 - The `balance` method now returns `null` as default instead of `0`. This helps to differentiate between a failed connection and `0` balance
