@@ -21,7 +21,7 @@ class Arkesel extends Driver
             dd($response->object());
         }
 
-        return (int) $response->json('data.sms_balance');
+        return $response->json('data.sms_balance');
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array
