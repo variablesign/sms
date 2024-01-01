@@ -2,6 +2,11 @@
 
 All notable changes to `sms` will be documented in this file
 
+## 2.1.3
+
+- Registered the name `sms` for the `SmsChannel` to be used in the `via()` method.
+- Updated config to allow renaming or disabling the channel name.
+
 ## 2.0.3
 
 - Fixed `Arkesel` driver return `0` on error when checking balance instead of `null`

@@ -103,4 +103,16 @@ return [
         'mnotify' => \VariableSign\Sms\Drivers\Mnotify::class,
         'arkesel' => \VariableSign\Sms\Drivers\Arkesel::class,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Channel Name
+    |--------------------------------------------------------------------------
+    |
+    | The name of the notification to use in the via() method.
+    | Set this option to false to disable it and use the class name instead.
+    |
+    */
+
+    'channel_name' => 'sms',
 ];

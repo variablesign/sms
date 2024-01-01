@@ -3,6 +3,8 @@
 namespace VariableSign\Sms;
 
 use Illuminate\Support\ServiceProvider;
+use VariableSign\Sms\Channels\SmsChannel;
+use Illuminate\Support\Facades\Notification;
 
 class SmsServiceProvider extends ServiceProvider
 {
@@ -47,6 +49,12 @@ class SmsServiceProvider extends ServiceProvider
         $this->app->bind('sms', function () {
             return new Sms;
         });
+
+        if (config('sms.channel_name')) {
+            Notification::extend(config('sms.channel_name'), function ($app) {
+                return new SmsChannel();
+            });
+        }
     }
 
     /**

@@ -277,7 +277,7 @@ Returns `\Illuminate\Support\Collection` as the response;
 
 ## Channel Usage
 
-You can also send SMS messages through Laravel's notification class using `php artisan make:notification` command via our `SmsChannel::class` as the channel:
+You can also send SMS messages through Laravel's notification class using `php artisan make:notification` command via `sms` or `SmsChannel::class` as the channel. If you want to change the `sms` channel name or disable it from being registered, you can do so in the config file.
 
 ```php
 namespace App\Notifications;
@@ -298,7 +298,7 @@ class PaymentNotification extends Notification
      */
     public function via($notifiable)
     {
-        return [SmsChannel::class];
+        return ['sms']; // or SmsChannel::class
     }
 
     /**
