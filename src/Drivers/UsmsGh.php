@@ -50,7 +50,7 @@ class UsmsGh extends Driver
         }
 
         if ($this->debug) {
-            dd();
+            dd($response->object());
         }
 
         return $output;

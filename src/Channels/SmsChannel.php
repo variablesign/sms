@@ -8,8 +8,8 @@ class SmsChannel
 {
     public function send($notifiable, Notification $notification)
     {
-        if (method_exists($notifiable, 'routeNotificationSmsLog')) {
-            $id = $notifiable->routeNotificationSmsLog($notifiable);
+        if (method_exists($notifiable, 'routeNotificationSms')) {
+            $id = $notifiable->routeNotificationSms($notifiable);
         } else {
             $id = $notifiable->getKey();
         }
