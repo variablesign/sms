@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => 'smsonlinegh',
+    'default' => env('SMS_DEFAULT_GATEWAY', 'smsonlinegh'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,8 +48,8 @@ return [
                 'balance' => 'https://api.smsonlinegh.com/v4/report/balance',
                 'report' => 'https://api.smsonlinegh.com/v4/report/message/delivery',
             ],
-            'key' => null,
-            'sender' => null,
+            'key' => env('SMS_SMSONLINEGH_KEY'),
+            'sender' => env('SMS_SMSONLINEGH_SENDER'),
         ],
 
         'usmsgh' => [
@@ -58,8 +58,8 @@ return [
                 'balance' => 'https://webapp.usmsgh.com/api/balance',
                 'report' => 'https://webapp.usmsgh.com/api/sms/:id',
             ],
-            'key' => null,
-            'sender' => null,
+            'key' => env('SMS_USMSGH_KEY'),
+            'sender' => env('SMS_USMSGH_SENDER'),
         ],
 
         'mnotify' => [
@@ -68,8 +68,8 @@ return [
                 'balance' => 'https://api.mnotify.com/api/balance/sms',
                 'report' => 'https://api.mnotify.com/api/campaign/:id/delivered',
             ],
-            'key' => null,
-            'sender' => null,
+            'key' => env('SMS_MNOTIFY_KEY'),
+            'sender' => env('SMS_MNOTIFY_SENDER'),
         ],
 
         'arkesel' => [
@@ -78,8 +78,8 @@ return [
                 'balance' => 'https://sms.arkesel.com/api/v2/clients/balance-details',
                 'report' => 'https://sms.arkesel.com/api/v2/sms/:id',
             ],
-            'key' => null,
-            'sender' => null,
+            'key' => env('SMS_ARKESEL_KEY'),
+            'sender' => env('SMS_ARKESEL_SENDER'),
             'sandbox' => false,
         ],
 
@@ -109,7 +109,7 @@ return [
     | Channel Name
     |--------------------------------------------------------------------------
     |
-    | The name of the notification to use in the via() method.
+    | The name of the notification channel to use in the via() method.
     | Set this option to false to disable it and use the class name instead.
     |
     */
