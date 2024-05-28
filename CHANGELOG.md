@@ -2,6 +2,10 @@
 
 All notable changes to `sms` will be documented in this file
 
+## 2.1.4
+
+- Fixed `USMS-GH` driver returning balance as a string with currency symbol.
+
 ## 2.1.3
 
 - Registered the name `sms` for the `SmsChannel` to be used in the `via()` method.

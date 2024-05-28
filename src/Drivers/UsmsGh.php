@@ -21,7 +21,7 @@ class UsmsGh extends Driver
             dd($response->object());
         }
         
-        return $response->json('data.remaining_unit');
+        return filter_var($response->json('data.remaining_balance'), FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array
