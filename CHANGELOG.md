@@ -2,6 +2,13 @@
 
 All notable changes to `sms` will be documented in this file
 
+## 3.0.0
+
+- The `balance()` method now returns `int`, `float` and `null`.
+- Updated *SMS Online GH* api endpoints to v5.
+- Added new SMS gateways - TxtConnect & PiloSMS.
+- Updated the config file with the new gateways.
+
 ## 2.1.4
 
 - Fixed `USMS-GH` driver returning balance as a string with currency symbol.

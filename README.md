@@ -21,6 +21,15 @@ Supported gateways:
 -   [Arkesel](https://arkesel.com)
 -   More in future updates
 
+| Gateway                                  | Balance | Send    | Report  |
+|------------------------------------------|---------|---------|---------|
+| [SMS Online GH](https://smsonlinegh.com) | &check; | &check; | &check; |
+| [USMS-GH](https://usmsgh.com)            | &check; | &check; | &check; |
+| [mNotify](https://mnotify.com)           | &check; | &check; | &check; |
+| [Arkesel](https://arkesel.com)           | &check; | &check; | &check; |
+| [TxtConnect](https://txtconnect.net)     | &check; | &check; | &check; |
+| [PiloSMS](https://pilosms.com)           | &check; | &check; | &cross; |
+
 ## System Requirements
 
 - PHP 7.2 or greater 
@@ -96,7 +105,7 @@ With helper function
 $response = sms()->via('mnotify')->balance();
 ```
 
-Returns an integer as the response or `null` as the default;
+Returns `int` or `float` as the response and `null` as default;
 
 ```php
 250

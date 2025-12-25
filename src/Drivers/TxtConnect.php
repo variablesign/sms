@@ -4,7 +4,7 @@ namespace VariableSign\Sms\Drivers;
 
 use VariableSign\Sms\Contracts\Driver;
 
-class UsmsGh extends Driver
+class TxtConnect extends Driver
 {
     protected function boot(): void
     {
@@ -21,7 +21,7 @@ class UsmsGh extends Driver
             dd($response->object());
         }
 
-        return sanitize_balance($response->json('data.remaining_balance'));
+        return sanitize_balance($response->json('sms'));
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array
@@ -30,21 +30,22 @@ class UsmsGh extends Driver
 
         foreach ($recipients as $number) {
             $response = $this->client->post($this->data('endpoints.send'), [
-                    'sender_id' => $this->data('sender'),
-                    'recipient' => $number,
-                    'message' => $message
+                    'from' => $this->data('sender'),
+                    'to' => $number,
+                    'sms' => $message,
+                    'unicode' => intval($this->data('unicode'))
                 ]);
 
             if ($this->debug) {
                 dump($response->object());
             }
 
-            if ($response->json('status') == 'success') {
+            if ($response->json('msg') == 'Sms send Sucessfull') {
                 $output[] = array_merge([
-                    'id' => $response->json('data.uid'),
-                    'to' => $response->json('data.to'),
+                    'id' => $response->json('messageId'),
+                    'to' => $number,
                     'message' => $message,
-                    'status' =>  strtolower($response->json('data.status'))
+                    'status' =>  $response->json('msg')
                 ], $mergeData);
             }
         }
@@ -69,11 +70,10 @@ class UsmsGh extends Driver
             dd($response->object());
         }
 
-        if ($response->json('data', null)) {
+        if ($response->json('msg', null)) {
             $output[] = [
                 'id' => $id,
-                'to' => $response->json('data.to'),
-                'status' =>  strtolower($response->json('data.status'))
+                'status' =>  $response->json('msg')
             ];
         }
 

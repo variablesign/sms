@@ -15,7 +15,7 @@ class SmsOnlineGh extends Driver
             ]);
     }
 
-    public function balance(): null|int
+    public function balance(): null|int|float
     {
         $response = $this->client->post($this->data('endpoints.balance'));
 
@@ -23,7 +23,7 @@ class SmsOnlineGh extends Driver
             dd($response->object());
         }
 
-        return $response->json('data.balance.amount');
+        return sanitize_balance($response->json('data.balance'));
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array

@@ -68,7 +68,7 @@ class Sms
         return $this;
     }
 
-    public function balance(): null|int
+    public function balance(): null|int|float
     {
         if ($this->config('gateways.' . $this->gateway. '.balance')) {
             return null;

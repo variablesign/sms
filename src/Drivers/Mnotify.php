@@ -11,7 +11,7 @@ class Mnotify extends Driver
         //
     }
 
-    public function balance(): null|int
+    public function balance(): null|int|float
     {
         $data = [
             'key' => $this->data('key')
@@ -23,7 +23,7 @@ class Mnotify extends Driver
             dd($response->object());
         }
 
-        return $response->json('balance');
+        return sanitize_balance($response->json('balance'));
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array

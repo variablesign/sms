@@ -13,7 +13,7 @@ class Arkesel extends Driver
             ]);
     }
 
-    public function balance(): null|int
+    public function balance(): null|int|float
     {
         $response = $this->client->get($this->data('endpoints.balance'));
 
@@ -21,7 +21,7 @@ class Arkesel extends Driver
             dd($response->object());
         }
 
-        return $response->json('data.sms_balance');
+        return sanitize_balance($response->json('data.sms_balance'));
     }
 
     public function send(array $recipients, string $message, array $mergeData = []): ?array

@@ -44,9 +44,9 @@ return [
 
         'smsonlinegh' => [
             'endpoints' => [
-                'send' => 'https://api.smsonlinegh.com/v4/message/sms/send',
-                'balance' => 'https://api.smsonlinegh.com/v4/report/balance',
-                'report' => 'https://api.smsonlinegh.com/v4/report/message/delivery',
+                'send' => 'https://api.smsonlinegh.com/v5/message/sms/send',
+                'balance' => 'https://api.smsonlinegh.com/v5/report/balance',
+                'report' => 'https://api.smsonlinegh.com/v5/report/message/delivery',
             ],
             'key' => env('SMS_SMSONLINEGH_KEY'),
             'sender' => env('SMS_SMSONLINEGH_SENDER'),
@@ -83,6 +83,17 @@ return [
             'sandbox' => false,
         ],
 
+        'txtconnect' => [
+            'endpoints' => [
+                'send' => 'https://txtconnect.net/dev/api/sms/send',
+                'balance' => 'https://txtconnect.net/dev/api/sms/checkbalance',
+                'report' => 'https://txtconnect.net/dev/api/sms/getstatus/:id',
+            ],
+            'key' => env('SMS_TXTCONNECT_KEY'),
+            'sender' => env('SMS_TXTCONNECT_SENDER'),
+            'unicode' => true,
+        ],
+
     ],
 
     /*
@@ -102,6 +113,7 @@ return [
         'usmsgh' => \VariableSign\Sms\Drivers\UsmsGh::class,
         'mnotify' => \VariableSign\Sms\Drivers\Mnotify::class,
         'arkesel' => \VariableSign\Sms\Drivers\Arkesel::class,
+        'txtconnect' => \VariableSign\Sms\Drivers\TxtConnect::class,
     ],
 
     /*
