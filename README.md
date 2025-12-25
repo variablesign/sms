@@ -19,6 +19,8 @@ Supported gateways:
 -   [USMS-GH](https://usmsgh.com)
 -   [mNotify](https://mnotify.com)
 -   [Arkesel](https://arkesel.com)
+-   [TxtConnect](https://txtconnect.net)
+-   [PiloSMS](https://pilosms.com)
 -   More in future updates
 
 | Gateway                                  | Balance | Send    | Report  |
